@@ -1,19 +1,70 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Projects from '@/components/Projects';
-import Skills from '@/components/Skills';
-import Contact from '@/components/Contact';
+'use client'
+
+import { useRef, useEffect, useState } from "react";
+import gsap from "gsap";
+import {useGSAP} from '@gsap/react'
+import { supabase } from "@/lib/supabase";
+import ProjectCard from "@/components/ProjectCard";
+
+interface Project {
+  id: number;
+  text: string;
+  category: string;
+  description: string;
+  image_url: string;
+}
 
 export default function Home() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const container = useRef(null)
+
+  useEffect(() => {
+    async function fetchProjects() {
+      const { data } = await supabase
+      .from('projects')
+      .select('*')
+      .order('id', {ascending:false});
+
+    if (data) {
+      setProjects(data)
+    }
+  }
+  fetchProjects();
+}, []);
+
+useGSAP(() => {
+  if (projects.length > 0) {
+    gsap.fromTo(".project-card", 
+      {y: 50, opacity: 0},
+      {y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out"}
+    );
+  }
+}, {scope: container, dependencies: [projects]});
+
   return (
-    <div className="bg-black text-white">
-      <Navbar />
-      <main id="home">
-        <Hero />
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
-    </div>
+   <main ref={container} className="min-h-screen bg-[#0B0A14] text-white">
+    {/* HERO */}
+
+    <section className="py-24 px-6 md:px-20 max-w-7xl mx-auto">
+      <h2 className="text-4xl md:text-5xl font-light mb-16 tracking-tight">Selected Works</h2>
+
+      {projects.length === 0  && (
+        <p className="text-gray-500 animate-pulse">Carregando Projetos do Banco</p>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project)=> (
+          <div key={project.id} className="project-card opacity-0">
+            <ProjectCard
+              title={project.text}
+              category={project.category}
+              description={project.description}
+              image_url={project.image_url}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+   </main>
   );
 }
