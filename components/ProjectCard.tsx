@@ -20,7 +20,7 @@ export default function ProjectCard ({ title, category, description, image_url}:
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
+          <div className="w-full h-full bg-linear-to-br from-purple-900/20 to-blue-900/20 flex items-center justify-center">
             <span className="text-white/20 text-sm uppercase">Sem imagem</span>
           </div>
         )}
