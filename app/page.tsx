@@ -1,10 +1,15 @@
 'use client'
 
 import { useRef, useEffect, useState } from "react";
+
 import gsap from "gsap";
 import {useGSAP} from '@gsap/react'
+
 import { supabase } from "@/lib/supabase";
+
 import ProjectCard from "@/components/ProjectCard";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
 
 interface Project {
   id: number;
@@ -43,9 +48,11 @@ useGSAP(() => {
 
   return (
    <main ref={container} className="min-h-screen bg-[#0B0A14] text-white">
-    {/* HERO */}
+    <Hero />
 
-    <section className="py-24 px-6 md:px-20 max-w-7xl mx-auto">
+    <About/>
+
+    <section className="py-24 px-6 md:px-20 max-w-7xl mx-auto" id="projects">
       <h2 className="text-4xl md:text-5xl font-light mb-16 tracking-tight">Selected Works</h2>
 
       {projects.length === 0  && (
