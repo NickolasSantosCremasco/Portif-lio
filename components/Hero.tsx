@@ -116,11 +116,11 @@ export default function Hero() {
 
                 <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tight mb-8">
                     <span className="hero-title-line block">
-                        Crafting Digital
+                        Nickolas Cremasco
                     </span>
                     
                     <span className="hero-title-ethereal block italic font-light text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-fuchsia-300 to-blue-400 relative">
-                        Etherealism
+                        Fullstack Developer
                         
                         <span className="absolute inset-0 blur-2xl bg-linear-to-r from-purple-400 via-fuchsia-300 to-blue-400 opacity-30 -z-10" aria-hidden="true">
                             Etherealism
