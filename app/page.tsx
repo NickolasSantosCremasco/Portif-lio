@@ -11,6 +11,7 @@ import ProjectCard from "@/public/components/ProjectCard";
 import Hero from "@/public/components/Hero";
 import About from "@/public/components/About";
 import Navbar from "@/public/components/Navbar";
+import Footer from "@/public/components/Footer";
 
 interface Project {
   id: number;
@@ -75,6 +76,9 @@ useGSAP(() => {
         ))}
       </div>
     </section>
+
+    <Footer/>
    </main>
+
   );
 }

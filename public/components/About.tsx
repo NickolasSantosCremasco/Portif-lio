@@ -111,6 +111,7 @@ export default function About() {
    return (
         <section 
             ref={sectionRef} 
+            id="about"
             className="relative py-32 px-6 md:px-20 bg-[#0B0A14] overflow-hidden">
      
             <div className="about-blob-1 absolute -left-20 top-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px] -z-10"/>
@@ -130,7 +131,7 @@ export default function About() {
                     </span>
                     
                  
-                    <h3 className="about-title text-4xl md:text-5xl font-bold leading-tight">
+                    <h3  className=" about-title text-4xl md:text-5xl font-bold leading-tight">
                         Transformando Códigos em{' '}
                     
                         <span className="about-highlight relative inline-block italic font-light text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-fuchsia-300 to-blue-400">

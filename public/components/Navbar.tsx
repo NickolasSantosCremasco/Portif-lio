@@ -34,8 +34,8 @@ export default function Navbar() {
             </ul>
             
             <div className="flex items-center gap-4 border-l border-white/10 pl-6">
-                    <a href="https://github.com" target="_blank" className="text-gray-400 hover:text-white transition-all hover:scale-110"><Github size={18} /></a>
-                    <a href="https://linkedin.com" target="_blank" className="text-gray-400 hover:text-white transition-all hover:scale-110"><Linkedin size={18} /></a>
+                    <a href="https://github.com/NickolasSantosCremasco" target="_blank" className="text-gray-400 hover:text-white transition-all hover:scale-110"><Github size={18} /></a>
+                    <a href="https://www.linkedin.com/in/nickolas-dos-santos-cremasco-0b4118246/" target="_blank" className="text-gray-400 hover:text-white transition-all hover:scale-110"><Linkedin size={18} /></a>
                 </div>
             </nav>
         </header>
