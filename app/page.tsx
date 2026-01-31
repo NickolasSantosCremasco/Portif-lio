@@ -10,6 +10,7 @@ import { supabase } from "@/lib/supabase";
 import ProjectCard from "@/public/components/ProjectCard";
 import Hero from "@/public/components/Hero";
 import About from "@/public/components/About";
+import Navbar from "@/public/components/Navbar";
 
 interface Project {
   id: number;
@@ -48,6 +49,8 @@ useGSAP(() => {
 
   return (
    <main ref={container} className="min-h-screen bg-[#0B0A14] text-white">
+    <Navbar/>
+    
     <Hero />
 
     <About/>
