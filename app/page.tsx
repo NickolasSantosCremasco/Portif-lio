@@ -7,9 +7,9 @@ import {useGSAP} from '@gsap/react'
 
 import { supabase } from "@/lib/supabase";
 
-import ProjectCard from "@/components/ProjectCard";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
+import ProjectCard from "@/public/components/ProjectCard";
+import Hero from "@/public/components/Hero";
+import About from "@/public/components/About";
 
 interface Project {
   id: number;
@@ -53,7 +53,7 @@ useGSAP(() => {
     <About/>
 
     <section className="py-24 px-6 md:px-20 max-w-7xl mx-auto" id="projects">
-      <h2 className="text-4xl md:text-5xl font-light mb-16 tracking-tight">Selected Works</h2>
+      <h2 className="text-4xl md:text-5xl font-light mb-16 tracking-tight">Trabalhos Selecionados</h2>
 
       {projects.length === 0  && (
         <p className="text-gray-500 animate-pulse">Carregando Projetos do Banco</p>

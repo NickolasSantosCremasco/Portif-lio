@@ -13,7 +13,7 @@ export default function About() {
     useGSAP(() => {
 
         // Scroll Trigger Animations
-        gsap.from('about-tag', {
+        gsap.from('.about-tag', {
             scrollTrigger: {
                 //@ts-ignore
                 trigger: '.about-tag',
@@ -72,7 +72,7 @@ export default function About() {
             scrollTrigger: {
                 trigger: '.skills-container', // ← Novo! Adicione essa classe
                 start: 'top 80%',
-                markers: true,
+                
             },
             opacity: 0,
             y: 30,
@@ -121,7 +121,7 @@ export default function About() {
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-20 -z-10"/>
             
          
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
                
                 <div className="space-y-8">
                 
@@ -154,7 +154,7 @@ export default function About() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="skills-container grid grid-cols-2 gap-4">
                
                     <div className="skill-card group relative p-6 
                                     bg-white/5 backdrop-blur-sm
