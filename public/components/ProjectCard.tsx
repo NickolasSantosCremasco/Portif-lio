@@ -13,7 +13,7 @@ export default function ProjectCard ({ title, category, description, image_url}:
       
       {/* Área da Imagem */}
       <div className="h-48 w-full overflow-hidden bg-white/5 relative">
-        {image_url ? (
+        {image_url && image_url !== 'link' ? (
           <img 
             src={image_url} 
             alt={title} 
@@ -41,6 +41,7 @@ export default function ProjectCard ({ title, category, description, image_url}:
             {description}
           </p>
         </div>
+        
       </div>
     </div>
   );

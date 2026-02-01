@@ -56,7 +56,7 @@ useGSAP(() => {
 
     <About/>
 
-    <section className="py-24 px-6 md:px-20 max-w-7xl mx-auto" id="projects">
+    <section className="py-24 px-6 md:px-20 max-w-8xl mx-auto" id="projects">
       <h2 className="text-4xl md:text-5xl font-light mb-16 tracking-tight">Trabalhos Selecionados</h2>
 
       {projects.length === 0  && (

@@ -33,19 +33,42 @@ export default function AdminPage() {
         setLoading(true);
 
         const formData = new FormData(e.currentTarget);
+        const imageFile = formData.get('image_file') as File;
+        let imageUrl = "";
 
-        //Inserindo Dados
-        const {error} = await supabase.from('projects').insert({
-            text: formData.get("title"),
-            category: formData.get('category'),
-            description: formData.get('description'),
-            image_url: formData.get('image_url'),
+        if (imageFile && imageFile.size > 0) {
+          const fileExt = imageFile.name.split('.').pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const filePath = `${fileName}`;
+          
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('project-images')
+            .upload(filePath, imageFile);
+
+          if(uploadError) {
+            alert('Erro no upload da imagem:' + uploadError.message);
+            setLoading(false);
+            return;
+          }
+
+          const { data: publicUrlData } = supabase.storage
+            .from('project-images')
+            .getPublicUrl(filePath)
+
+          imageUrl = publicUrlData.publicUrl
+        }
+
+        const {error: dbError } = await supabase.from('projects').insert({
+          text:formData.get('title'),
+          category: formData.get('category'),
+          description: formData.get('description'),
+          image_url: imageUrl,
         });
 
         setLoading(false);
 
-        if (error) {
-            alert("Erro ao salvar: " + error.message);
+        if (dbError) {
+            alert("Erro ao salvar: " + dbError.message);
         } else {
             alert('Projeto cadastrado com sucesso!');
             (e.target as HTMLFormElement).reset()
@@ -91,11 +114,17 @@ export default function AdminPage() {
               <label className="text-xs text-gray-400">Descrição</label>
               <textarea name="description" className="w-full bg-black/40 border border-white/10 p-3 rounded-xl outline-none focus:border-purple-500 h-24" />
             </div>
+            
             <div>
-              <label className="text-xs text-gray-400">Imagem URL</label>
-              <input name="image_url" className="w-full bg-black/40 border border-white/10 p-3 rounded-xl outline-none focus:border-purple-500" />
+              <label className="text-xs text-gray-400">Link do Projeto (Demo/Github)</label>
+              <input type="url" name="project_url" placeholder="https://..." className="w-full bg-black/40 border border-white/10 p-3 rounded-xl outline-none focus:border-purple-500" />
             </div>
             
+            <div>
+              <label className="text-xs text-gray-400">Imagem do Projeto</label>
+              <input name="image_file" type="file" accept="image/*" className="w-full bg-black/40 border border-white/10 p-3 rounded-xl outline-none focus:border-purple-500" />
+            </div>
+
             <button 
               disabled={loading}
               className="w-full py-4 bg-purple-600 rounded-full font-bold hover:bg-purple-500 transition-all disabled:opacity-50"
