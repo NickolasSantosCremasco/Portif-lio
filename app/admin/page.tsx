@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase"
 import { Trash2 } from "lucide-react";
 
@@ -13,6 +14,17 @@ interface Project {
 export default function AdminPage() {
     const [loading, setLoading] = useState(false);
     const [projects, setProjects] = useState<Project[]>([])
+    
+    const searchParams = useSearchParams();
+    const isAdmin = searchParams.get('key') === process.env.NEXT_PUBLIC_ADMIN_KEY
+
+    if(!isAdmin) {
+      return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0B0A14] text-white p-10">
+        <h1 className="text-xl font-bold opacity-50">Acesso Restrito 🔐</h1>
+      </div>
+    );
+    }
 
     async function fetchProjects() {
         const {data} = await supabase
@@ -63,6 +75,7 @@ export default function AdminPage() {
           category: formData.get('category'),
           description: formData.get('description'),
           image_url: imageUrl,
+          project_url:formData.get('project_url'),
         });
 
         setLoading(false);
