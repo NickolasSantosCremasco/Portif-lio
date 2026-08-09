@@ -4,11 +4,11 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import {useGSAP} from '@gsap/react'
 import { supabase } from "@/lib/supabase";
-import ProjectCard from "@/public/components/ProjectCard"; 
-import Hero from "@/public/components/Hero";
-import About from "@/public/components/About";
-import Navbar from "@/public/components/Navbar";
-import Footer from "@/public/components/Footer";
+import ProjectCard from "@/components/ProjectCard"; 
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface Project {
   id: number;
