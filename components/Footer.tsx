@@ -1,87 +1,69 @@
+'use client'
+
 import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="relative bg-[#0B0A14] border-t border-white/10 pt-20 pb-10 overflow-hidden">
-      
-      {/* Luz de fundo decorativa (Glow) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-purple-600/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          
-          {/* Coluna 1: Branding */}
-          <div className="col-span-1 md:col-span-2 space-y-4">
-            <div className="w-10 h-10 rounded-full bg-linear-to-tr from-purple-600 to-blue-600 flex items-center justify-center text-sm font-bold text-white shadow-lg mb-4">
-              NC
-            </div>
-            <p className="text-gray-400 max-w-sm leading-relaxed">
-              Desenvolvendo experiências digitais que unem a lógica do código à beleza do design. Vamos construir algo incrível juntos?
-            </p>
-          </div>
-
-          {/* Coluna 2: Navegação */}
-          <div className="space-y-4">
-            <h4 className="text-white font-bold tracking-wide">Menu</h4>
-            <ul className="space-y-2 text-sm text-gray-500">
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Home</a></li>
-              <li><a href="#about" className="hover:text-purple-400 transition-colors">Sobre Mim</a></li>
-              <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projetos</a></li>
-              <li><a href="/admin" className="hover:text-purple-400 transition-colors">Área Admin</a></li>
-            </ul>
-          </div>
-
-          {/* Coluna 3: Contato */}
-          <div className="space-y-4">
-            <h4 className="text-white font-bold tracking-wide">Conecte-se</h4>
-            <div className="flex gap-4">
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white hover:border-purple-500/50 transition-all hover:scale-110"
-              >
-                <Github size={18} />
-              </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-blue-400 hover:border-blue-500/50 transition-all hover:scale-110"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a 
-                href="mailto:seuemail@exemplo.com" 
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-purple-400 hover:border-purple-500/50 transition-all hover:scale-110"
-              >
-                <Mail size={18} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Linha Divisória */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-gray-600">
-            © {currentYear} Nickolas Cremasco. Todos os direitos reservados.
+    <footer className="relative bg-black text-white border-t border-white/10 py-8 px-8 md:px-16 overflow-hidden select-none">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        {/* 1. Direitos Autorais e Branding */}
+        <div className="flex items-center space-x-4">
+          <span className="text-xs font-bold tracking-widest text-white uppercase">
+            NC
+          </span>
+          <span className="text-gray-600">|</span>
+          <p className="text-xs text-gray-400 tracking-wider">
+            © {currentYear} NICKOLAS CREMASCO. TODOS OS DIREITOS RESERVADOS.
           </p>
-          
-          <div className="flex items-center gap-6">
-             <p className="text-xs text-gray-600 flex items-center gap-1">
-                Feito com <span className="text-purple-500 animate-pulse">❤</span> em Next.js
-             </p>
-             
-             {/* Botão de Voltar ao Topo */}
-             <a 
-               href="#" 
-               className="group flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-white transition-colors"
-             >
-               Voltar ao Topo
-               <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
-             </a>
-          </div>
         </div>
+
+        {/* 2. Redes Sociais Minimalistas */}
+        <div className="flex items-center space-x-6 text-gray-400">
+          <a 
+            href="https://github.com/NickolasSantosCremasco" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-white transition-colors duration-200"
+            aria-label="GitHub"
+          >
+            <Github size={18} />
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/nickolas-dos-santos-cremasco-0b4118246/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-white transition-colors duration-200"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={18} />
+          </a>
+          <a 
+            href="mailto:nickolas.cremasco@exemplo.com" 
+            className="hover:text-white transition-colors duration-200"
+            aria-label="Email"
+          >
+            <Mail size={18} />
+          </a>
+        </div>
+
+        {/* 3. Botão de Voltar ao Topo */}
+        <a 
+          href="#" 
+          onClick={scrollToTop}
+          className="group flex items-center gap-2 text-xs font-medium tracking-widest text-gray-400 hover:text-white transition-colors uppercase"
+        >
+          <span>VOLTAR AO TOPO</span>
+          <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform duration-300" />
+        </a>
+
       </div>
     </footer>
   );

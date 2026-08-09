@@ -4,11 +4,12 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import {useGSAP} from '@gsap/react'
 import { supabase } from "@/lib/supabase";
-import ProjectCard from "@/components/ProjectCard"; 
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
+import Portfolio from "@/components/Portfolio";
 
 interface Project {
   id: number;
@@ -53,28 +54,8 @@ useGSAP(() => {
     <Hero />
 
     <About/>
-
-    <section className="py-24 px-6 md:px-20 max-w-8xl mx-auto" id="projects">
-      <h2 className="text-4xl md:text-5xl font-light mb-16 tracking-tight">Trabalhos Selecionados</h2>
-
-      {projects.length === 0  && (
-        <p className="text-gray-500 animate-pulse">Carregando Projetos do Banco...</p>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project)=> (
-          <div key={project.id} className="project-card opacity-0">
-            <ProjectCard
-              title={project.text}
-              category={project.category}
-              description={project.description}
-              image_url={project.image_url}
-              project_url={project.project_url}
-            />
-          </div>
-        ))}
-      </div>
-    </section>
+    <Portfolio />
+    <Contact />
 
     <Footer/>
    </main>
