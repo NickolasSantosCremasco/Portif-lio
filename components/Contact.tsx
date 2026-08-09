@@ -4,13 +4,15 @@ import { useRef, useState } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Mail, Phone, MapPin, ArrowUpRight, CheckCircle } from "lucide-react"
+import { Mail, Phone, MapPin, ArrowUpRight, CheckCircle, Loader2, AlertCircle } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -42,10 +44,37 @@ export default function Contact() {
     }, '-=0.6')
   }, { scope: sectionRef })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // 🚀 Função para enviar o formulário via API do Web3Forms
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
+    setIsSubmitting(true)
+    setErrorMessage("")
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "")
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setSubmitted(true)
+        form.reset() // Limpa os campos após o envio
+        setTimeout(() => setSubmitted(false), 5000)
+      } else {
+        setErrorMessage(data.message || "Ocorreu um erro ao enviar. Tente novamente.")
+      }
+    } catch {
+      setErrorMessage("Erro de conexão. Verifique sua rede e tente novamente.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -127,6 +156,7 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   required
                   placeholder="Seu Nome"
                   className="bg-transparent border-b border-white/20 pb-2 text-sm text-white placeholder-gray-600 focus:border-white focus:outline-hidden transition-colors"
@@ -141,6 +171,7 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   required
                   placeholder="seu.email@exemplo.com"
                   className="bg-transparent border-b border-white/20 pb-2 text-sm text-white placeholder-gray-600 focus:border-white focus:outline-hidden transition-colors"
@@ -155,6 +186,7 @@ export default function Contact() {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
                   placeholder="Novo Projeto"
                   className="bg-transparent border-b border-white/20 pb-2 text-sm text-white placeholder-gray-600 focus:border-white focus:outline-hidden transition-colors"
                 />
@@ -167,6 +199,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   required
                   rows={3}
                   placeholder="Sua Mensagem..."
@@ -174,21 +207,40 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Botão Enviar em Pílula */}
+              {/* Botão Enviar */}
               <div className="pt-4 flex items-center justify-between">
                 <button
                   type="submit"
-                  className="group w-full flex items-center justify-center gap-2 py-3 px-6 text-xs font-bold tracking-widest uppercase text-white border border-gray-500 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="group w-full flex items-center justify-center gap-2 py-3 px-6 text-xs font-bold tracking-widest uppercase text-white border border-gray-500 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span>ENVIAR MENSAGEM</span>
-                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  {isSubmitting ? (
+                    <>
+                      <span>ENVIANDO...</span>
+                      <Loader2 size={16} className="animate-spin" />
+                    </>
+                  ) : (
+                    <>
+                      <span>ENVIAR MENSAGEM</span>
+                      <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    </>
+                  )}
                 </button>
               </div>
 
+              {/* Mensagem de Sucesso */}
               {submitted && (
                 <div className="flex items-center justify-center space-x-2 text-emerald-400 text-xs font-mono tracking-wider pt-2">
                   <CheckCircle size={16} />
                   <span>MENSAGEM ENVIADA COM SUCESSO!</span>
+                </div>
+              )}
+
+              {/* Mensagem de Erro */}
+              {errorMessage && (
+                <div className="flex items-center justify-center space-x-2 text-rose-400 text-xs font-mono tracking-wider pt-2">
+                  <AlertCircle size={16} />
+                  <span>{errorMessage}</span>
                 </div>
               )}
             </form>
