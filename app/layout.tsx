@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Nickolas - Desenvolvedor Full Stack",
   description: "Portfólio profissional com animações GSAP. Desenvolvedor Full Stack especializado em React, Next.js e tecnologias web modernas.",
   keywords: ["desenvolvedor", "full stack", "react", "next.js", "portfólio"],
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -11,18 +11,19 @@ import {
   Linkedin, 
   Instagram, 
   Twitter, 
-  Maximize2 
+  Maximize2,
+  ArrowUpRight
 } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null)
-  const { t } = useLanguage() // 🌐 Consumindo o dicionário de tradução
+  const { t } = useLanguage()
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-    // 🎬 1. Animação de Entrada
+    // 🎬 1. Animação de Entrada GSAP
     tl.from('.hero-firstname', {
       opacity: 0,
       x: -30,
@@ -40,9 +41,10 @@ export default function Hero() {
     }, "-=0.4")
     .from('.hero-btn', {
       opacity: 0,
-      scale: 0.9,
+      y: 20,
       stagger: 0.15,
-      duration: 0.6
+      duration: 0.6,
+      clearProps: "all" // 🔑 Limpa as propriedades inline do GSAP após animar para não travar o hover do Tailwind
     }, "-=0.4")
     .from('.hero-footer', {
       opacity: 0,
@@ -50,7 +52,7 @@ export default function Hero() {
       duration: 0.8
     }, "-=0.4")
 
-    // 🖱️ 2. Parallax com o Mouse no Background e Textos
+    // 🖱️ 2. Parallax com o Mouse
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
       const centerX = window.innerWidth / 2
@@ -93,11 +95,10 @@ export default function Hero() {
           priority
           className="hero-bg-img object-cover object-center opacity-40 scale-105"
         />
-        {/* Degradê para garantir contraste total do texto no lado esquerdo */}
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
       </div>
 
-      {/* 📝 Conteúdo Central Traduzido */}
+      {/* 📝 Conteúdo Central */}
       <main className="hero-content relative z-10 max-w-2xl my-auto ml-0 md:ml-12">
         <div className="space-y-1">
           <span className="hero-firstname block text-2xl md:text-3xl font-light tracking-[0.25em] text-gray-300 uppercase">
@@ -111,24 +112,31 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Botões Traduzidos */}
+        {/* 🎯 Botões de CTA com Animação de Hover Totalmente Funcional */}
         <div className="flex items-center gap-4 pt-8">
+          {/* Botão Principal de Contato (Destaque Branco) */}
           <Link
-            href="#resume"
-            className="hero-btn px-8 py-2.5 text-sm font-medium text-white border border-gray-400 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+            href="#contact"
+            className="hero-btn group relative flex items-center gap-2 px-8 py-3.5 text-sm font-bold tracking-wider uppercase text-black bg-white rounded-full hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-lg shadow-white/10 active:scale-95 cursor-pointer"
           >
-            {t.hero.resumeBtn}
+            <span>{t.hero.contactBtn}</span>
+            <ArrowUpRight 
+              size={18} 
+              className="transform transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1" 
+            />
           </Link>
+
+          {/* Botão Secundário de Portfólio (Contorno Minimalista) */}
           <Link
             href="#portfolio"
-            className="hero-btn px-8 py-2.5 text-sm font-medium text-white border border-gray-400 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+            className="hero-btn group flex items-center gap-2 px-8 py-3.5 text-sm font-medium tracking-wider uppercase text-white border border-gray-500 rounded-full hover:bg-white/10 hover:border-white hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer"
           >
-            {t.hero.portfolioBtn}
+            <span>{t.hero.portfolioBtn}</span>
           </Link>
         </div>
       </main>
 
-      {/* 🌐 Rodapé (Redes Sociais e Botão Fullscreen) */}
+      {/* 🌐 Rodapé */}
       <footer className="hero-footer relative z-10 flex items-center justify-between w-full max-w-7xl mx-auto">
         <div className="flex items-center space-x-6 text-gray-400">
           <a href="#" className="hover:text-white transition-colors"><Dribbble size={18} /></a>

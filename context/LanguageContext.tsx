@@ -18,6 +18,7 @@ export const translations = {
       description: 'Desenvolvedor Full Stack especializado na criação de aplicações web de alta performance, interfaces modernas e arquiteturas robustas.',
       resumeBtn: 'Resume',
       portfolioBtn: 'Portfolio',
+      contactBtn: 'ENTRAR EM CONTATO',
     },
     about: {
       title: 'ABOUT',
@@ -65,6 +66,7 @@ export const translations = {
       description: 'Full Stack Developer specializing in building high-performance web applications, modern interfaces, and scalable architectures.',
       resumeBtn: 'Resume',
       portfolioBtn: 'Portfolio',
+      contactBtn: 'GET IN TOUCH', 
     },
     about: {
       title: 'ABOUT',
