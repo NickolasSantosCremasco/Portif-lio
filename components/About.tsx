@@ -12,7 +12,6 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useGSAP(() => {
-    // 🎬 Linha do Tempo sincronizada pelo Scroll
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -57,7 +56,7 @@ export default function About() {
     <section 
       ref={sectionRef} 
       id="about"
-      className="relative min-h-screen bg-black text-white py-24 px-8 md:px-16 flex items-center overflow-hidden"
+      className="relative min-h-screen bg-black text-white py-24 px-8 md:px-16 flex items-center overflow-hidden select-none"
     >
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
@@ -93,19 +92,18 @@ export default function About() {
           </div>
         </div>
 
-        {/* 📸 Lado Direito: Foto de Perfil Retrato (Dark Style) */}
-        <div className="lg:col-span-5 relative w-full aspect-[3/4] max-w-md mx-auto lg:max-w-none">
-          <div className="about-image-container relative w-full h-full overflow-hidden rounded-sm grayscale contrast-125">
+        {/* 📸 Lado Direito: Foto em PNG Transparente */}
+        <div className="lg:col-span-5 relative w-full h-[500px] md:h-175  bottom-50 flex items-end justify-center">
+          <div className="about-image-container relative w-full h-full  drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
             <Image
-              src="/profile.jpg" // Adicione sua foto em alta resolução na pasta public/
+              src="/img/myself.png"
               alt="Nickolas Cremasco"
               fill
               priority
-              className="object-cover object-center"
+              className="object-contain object-bottom"
             />
-            {/* Sombras e Gradientes para criar o efeito Low-Key (Dark lighting) da imagem de referência */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 opacity-90" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
+            {/* Gradiente sutil na base apenas para suavizar o corte inferior da camiseta */}
+            <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black to-transparent" />
           </div>
         </div>
 
