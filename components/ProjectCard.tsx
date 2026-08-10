@@ -1,4 +1,7 @@
+'use client'
+
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ProjectProps {
     title: string;
@@ -9,7 +12,7 @@ interface ProjectProps {
 }
 
 export default function ProjectCard({ title, category, description, image_url, project_url }: ProjectProps) {
-    // Validação para garantir que o link é uma URL real
+    const { t } = useLanguage();
     const hasValidLink = Boolean(project_url && project_url.startsWith('http'));
 
     return (
@@ -26,7 +29,7 @@ export default function ProjectCard({ title, category, description, image_url, p
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-neutral-900 border-b border-white/5">
                         <span className="text-[10px] font-mono tracking-widest text-gray-600 uppercase">
-                            NO IMAGE PREVIEW
+                            {t.portfolio.noImage}
                         </span>
                     </div>
                 )}
@@ -76,9 +79,9 @@ export default function ProjectCard({ title, category, description, image_url, p
                     </p>
                 </div>
 
-                {/* Rodapé do Card com Linha Guia */}
+                {/* Rodapé do Card com Linha Guia Traduzido */}
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono tracking-widest text-gray-500 uppercase">
-                    <span>PROJECT</span>
+                    <span>{t.portfolio.projectLabel}</span>
                     <span className="w-12 h-[1px] bg-blue-500/50" />
                 </div>
             </div>

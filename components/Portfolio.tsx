@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { supabase } from "@/lib/supabase"
 import ProjectCard from "./ProjectCard"
+import { useLanguage } from "@/context/LanguageContext"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,6 +22,7 @@ interface Project {
 export default function Portfolio() {
   const [projects, setProjects] = useState<Project[]>([])
   const sectionRef = useRef<HTMLElement>(null)
+  const { t } = useLanguage() // 🌐 Consumindo o contexto de tradução
 
   // 1. Busca no Banco de Dados (Supabase)
   useEffect(() => {
@@ -80,23 +82,23 @@ export default function Portfolio() {
     >
       <div className="max-w-7xl mx-auto space-y-16">
         
-        {/* Cabeçalho da Seção */}
+        {/* Cabeçalho da Seção Traduzido */}
         <div className="portfolio-header space-y-3">
           <h2 className="text-5xl md:text-6xl font-black tracking-widest uppercase text-white leading-none">
-            PORTFOLIO
+            {t.portfolio.title}
           </h2>
           <div className="w-12 h-[2px] bg-blue-500" />
-          <p className="text-xs md:text-sm text-gray-400 font-mono tracking-wider">
-            FEATURED PROJECTS & EXPERIENCES
+          <p className="text-xs md:text-sm text-gray-400 font-mono tracking-wider uppercase">
+            {t.portfolio.subtitle}
           </p>
         </div>
 
-        {/* Estado de Carregamento */}
+        {/* Estado de Carregamento Traduzido */}
         {projects.length === 0 && (
           <div className="flex items-center space-x-3 py-12">
             <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
             <p className="text-xs font-mono tracking-widest text-gray-500 uppercase">
-              Carregando Projetos do Banco...
+              {t.portfolio.loading}
             </p>
           </div>
         )}

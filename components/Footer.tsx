@@ -1,9 +1,11 @@
 'use client'
 
 import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -14,14 +16,14 @@ export default function Footer() {
     <footer className="relative bg-black text-white border-t border-white/10 py-8 px-8 md:px-16 overflow-hidden select-none">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
-        {/* 1. Direitos Autorais e Branding */}
+        {/* 1. Direitos Autorais e Branding Traduzido */}
         <div className="flex items-center space-x-4">
           <span className="text-xs font-bold tracking-widest text-white uppercase">
             NC
           </span>
           <span className="text-gray-600">|</span>
-          <p className="text-xs text-gray-400 tracking-wider">
-            © {currentYear} NICKOLAS CREMASCO. TODOS OS DIREITOS RESERVADOS.
+          <p className="text-xs text-gray-400 tracking-wider uppercase">
+            © {currentYear} NICKOLAS CREMASCO. {t.footer.rights}
           </p>
         </div>
 
@@ -54,13 +56,13 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* 3. Botão de Voltar ao Topo */}
+        {/* 3. Botão de Voltar ao Topo Traduzido */}
         <a 
           href="#" 
           onClick={scrollToTop}
           className="group flex items-center gap-2 text-xs font-medium tracking-widest text-gray-400 hover:text-white transition-colors uppercase"
         >
-          <span>VOLTAR AO TOPO</span>
+          <span>{t.footer.backToTop}</span>
           <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform duration-300" />
         </a>
 

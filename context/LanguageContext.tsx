@@ -1,10 +1,10 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 type Language = 'pt' | 'en'
 
-// Dicionário de Traduções do Site
+// 🌐 Dicionário de Traduções do Site
 export const translations = {
   pt: {
     nav: {
@@ -30,7 +30,7 @@ export const translations = {
       subtitle: 'PROJETOS EM DESTAQUE E EXPERIÊNCIAS',
       loading: 'Carregando Projetos do Banco...',
       projectLabel: 'PROJECT',
-      noImage: 'SEM PREVIAS DE IMAGEM',
+      noImage: 'SEM PRÉVIA DE IMAGEM',
     },
     contact: {
       title: 'CONTACT',
@@ -113,8 +113,21 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('pt')
 
+  // 1. Carrega o idioma salvo no localStorage ao montar o componente
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('portfolio_lang') as Language
+    if (savedLanguage && (savedLanguage === 'pt' || savedLanguage === 'en')) {
+      setLanguage(savedLanguage)
+    }
+  }, [])
+
+  // 2. Função para alternar e salvar a preferência
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'pt' ? 'en' : 'pt'))
+    setLanguage((prev) => {
+      const nextLang: Language = prev === 'pt' ? 'en' : 'pt'
+      localStorage.setItem('portfolio_lang', nextLang)
+      return nextLang
+    })
   }
 
   const t = translations[language]

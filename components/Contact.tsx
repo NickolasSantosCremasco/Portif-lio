@@ -5,6 +5,7 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Mail, Phone, MapPin, ArrowUpRight, CheckCircle, Loader2, AlertCircle } from "lucide-react"
+import { useLanguage } from "@/context/LanguageContext"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,6 +14,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const { t } = useLanguage() // 🌐 Consumindo o dicionário de tradução
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -88,18 +90,18 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
-        {/* 📌 Lado Esquerdo: Textos e Informações de Contato */}
+        {/* 📌 Lado Esquerdo: Textos e Informações de Contato Traduzidos */}
         <div className="lg:col-span-6 space-y-10">
           <div className="contact-title-block space-y-3">
             <h2 className="text-5xl md:text-6xl font-black tracking-widest uppercase text-white leading-none">
-              CONTACT
+              {t.contact.title}
             </h2>
             <div className="w-12 h-[2px] bg-blue-500" />
             <p className="text-xs md:text-sm text-gray-400 font-mono tracking-wider pt-1">
               nickolas.cremasco@exemplo.com
             </p>
             <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed max-w-lg pt-4">
-              I am a Fullstack Developer focused on creating high-performance, responsive web applications. Feel free to reach out if you&apos;d like to collaborate, have a question, or just want to say hi.
+              {t.contact.description}
             </p>
           </div>
 
@@ -110,7 +112,9 @@ export default function Contact() {
                 <Mail size={18} />
               </div>
               <div>
-                <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">EMAIL</span>
+                <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">
+                  {t.contact.emailLabel}
+                </span>
                 <a href="mailto:nickolas.cremasco@exemplo.com" className="text-sm font-medium text-gray-200 hover:text-white transition-colors">
                   nickolas.cremasco@exemplo.com
                 </a>
@@ -122,7 +126,9 @@ export default function Contact() {
                 <Phone size={18} />
               </div>
               <div>
-                <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">PHONE</span>
+                <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">
+                  {t.contact.phoneLabel}
+                </span>
                 <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-white transition-colors">
                   +55 (11) 99999-9999
                 </a>
@@ -134,7 +140,9 @@ export default function Contact() {
                 <MapPin size={18} />
               </div>
               <div>
-                <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">LOCATION</span>
+                <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">
+                  {t.contact.locationLabel}
+                </span>
                 <span className="text-sm font-medium text-gray-200">
                   São Paulo, SP — Brasil
                 </span>
@@ -143,7 +151,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ✉️ Lado Direito: Card do Formulário */}
+        {/* ✉️ Lado Direito: Card do Formulário Traduzido */}
         <div className="lg:col-span-6">
           <div className="contact-card bg-neutral-900/40 border border-white/10 p-8 md:p-10 rounded-xl backdrop-blur-md shadow-2xl">
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -151,14 +159,14 @@ export default function Contact() {
               {/* Campo Nome */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="name" className="text-[11px] font-mono tracking-widest text-gray-300 uppercase">
-                  NOME
+                  {t.contact.nameField}
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
-                  placeholder="Seu Nome"
+                  placeholder={t.contact.namePlaceholder}
                   className="bg-transparent border-b border-white/20 pb-2 text-sm text-white placeholder-gray-600 focus:border-white focus:outline-hidden transition-colors"
                 />
               </div>
@@ -166,7 +174,7 @@ export default function Contact() {
               {/* Campo Email */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="email" className="text-[11px] font-mono tracking-widest text-gray-300 uppercase">
-                  EMAIL
+                  {t.contact.emailLabel}
                 </label>
                 <input
                   type="email"
@@ -181,13 +189,13 @@ export default function Contact() {
               {/* Campo Assunto */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="subject" className="text-[11px] font-mono tracking-widest text-gray-300 uppercase">
-                  ASSUNTO
+                  {t.contact.subjectField}
                 </label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  placeholder="Novo Projeto"
+                  placeholder={t.contact.subjectPlaceholder}
                   className="bg-transparent border-b border-white/20 pb-2 text-sm text-white placeholder-gray-600 focus:border-white focus:outline-hidden transition-colors"
                 />
               </div>
@@ -195,14 +203,14 @@ export default function Contact() {
               {/* Campo Mensagem */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="message" className="text-[11px] font-mono tracking-widest text-gray-300 uppercase">
-                  MENSAGEM
+                  {t.contact.messageField}
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={3}
-                  placeholder="Sua Mensagem..."
+                  placeholder={t.contact.messagePlaceholder}
                   className="bg-transparent border-b border-white/20 pb-2 text-sm text-white placeholder-gray-600 focus:border-white focus:outline-hidden transition-colors resize-none"
                 />
               </div>
@@ -216,12 +224,12 @@ export default function Contact() {
                 >
                   {isSubmitting ? (
                     <>
-                      <span>ENVIANDO...</span>
+                      <span>{t.contact.sendingBtn}</span>
                       <Loader2 size={16} className="animate-spin" />
                     </>
                   ) : (
                     <>
-                      <span>ENVIAR MENSAGEM</span>
+                      <span>{t.contact.sendBtn}</span>
                       <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                     </>
                   )}
@@ -232,7 +240,7 @@ export default function Contact() {
               {submitted && (
                 <div className="flex items-center justify-center space-x-2 text-emerald-400 text-xs font-mono tracking-wider pt-2">
                   <CheckCircle size={16} />
-                  <span>MENSAGEM ENVIADA COM SUCESSO!</span>
+                  <span>{t.contact.successMsg}</span>
                 </div>
               )}
 

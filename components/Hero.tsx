@@ -13,9 +13,11 @@ import {
   Twitter, 
   Maximize2 
 } from "lucide-react"
+import { useLanguage } from "@/context/LanguageContext"
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null)
+  const { t } = useLanguage() // 🌐 Consumindo o dicionário de tradução
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
@@ -95,7 +97,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
       </div>
 
-      {/* 📝 Conteúdo Central */}
+      {/* 📝 Conteúdo Central Traduzido */}
       <main className="hero-content relative z-10 max-w-2xl my-auto ml-0 md:ml-12">
         <div className="space-y-1">
           <span className="hero-firstname block text-2xl md:text-3xl font-light tracking-[0.25em] text-gray-300 uppercase">
@@ -105,23 +107,23 @@ export default function Hero() {
             CREMASCO
           </h1>
           <p className="hero-subtitle text-base md:text-lg font-light tracking-wider text-gray-400 pt-2 max-w-xl leading-relaxed">
-            Desenvolvedor Full Stack especializado na criação de aplicações web de alta performance, interfaces modernas e arquiteturas robustas.
+            {t.hero.description}
           </p>
         </div>
 
-        {/* Botões Estilizados como Pílulas */}
+        {/* Botões Traduzidos */}
         <div className="flex items-center gap-4 pt-8">
           <Link
             href="#resume"
             className="hero-btn px-8 py-2.5 text-sm font-medium text-white border border-gray-400 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300"
           >
-            Resume
+            {t.hero.resumeBtn}
           </Link>
           <Link
-            href="#projects"
+            href="#portfolio"
             className="hero-btn px-8 py-2.5 text-sm font-medium text-white border border-gray-400 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300"
           >
-            Portfolio
+            {t.hero.portfolioBtn}
           </Link>
         </div>
       </main>
