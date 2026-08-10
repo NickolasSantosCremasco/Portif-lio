@@ -62,7 +62,7 @@ export default function Navbar() {
 
           <div className="w-[1px] h-4 bg-white/20" />
 
-          {/* 🎛️ Interruptor / Switch de Idioma (PT | EN) */}
+       
           <button
             onClick={toggleLanguage}
             className="flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-300 text-xs font-mono tracking-widest text-gray-300 hover:text-white cursor-pointer"

@@ -5,11 +5,13 @@ import Image from "next/image"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLanguage } from "@/context/LanguageContext"
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null)
+  const { t } = useLanguage() // 🌐 Consumindo os textos do contexto de tradução
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -60,49 +62,49 @@ export default function About() {
     >
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        {/* 📝 Lado Esquerdo: Textos, Título e Localização */}
+        {/* 📝 Lado Esquerdo: Textos, Título e Localização Traduzidos */}
         <div className="lg:col-span-7 flex flex-col justify-between min-h-[480px] z-10">
           <div className="space-y-8">
             {/* Cabeçalho da Seção */}
             <div>
               <h2 className="about-title text-4xl md:text-5xl font-black tracking-widest uppercase text-white">
-                ABOUT
+                {t.about.title}
               </h2>
               <div className="w-12 h-[2px] bg-blue-500 my-3" />
               <p className="about-email text-xs md:text-sm text-gray-400 font-mono tracking-wider">
-                nickolas.cremasco@exemplo.com
+                nck.tec.suporte@gmail.com
               </p>
             </div>
 
-            {/* Parágrafos de Apresentação */}
+            {/* Parágrafos de Apresentação Traduzidos */}
             <div className="space-y-6 text-gray-300 text-base md:text-lg font-light leading-relaxed max-w-2xl">
               <p className="about-paragraph">
-                Desenvolvedor Fullstack focado na construção de aplicações web de alta performance, unindo a arquitetura consistente do backend ao design minimalista e responsivo no frontend.
+                {t.about.p1}
               </p>
               <p className="about-paragraph">
-                Especializado no ecossistema Next.js, Python e bancos de dados relacionais (PostgreSQL/MySQL), busco transformar requisitos complexos em código limpo e experiências imersivas.
+                {t.about.p2}
               </p>
             </div>
           </div>
 
-          {/* Rodapé do Lado Esquerdo: Localização */}
+          {/* Rodapé do Lado Esquerdo: Localização Traduzida */}
           <div className="about-location flex items-center gap-3 text-xs md:text-sm text-gray-400 tracking-widest pt-8 uppercase">
             <span className="w-8 h-[1px] bg-blue-500" />
-            <span>São Paulo, SP — Brasil</span>
+            <span>{t.about.location}</span>
           </div>
         </div>
 
         {/* 📸 Lado Direito: Foto em PNG Transparente */}
-        <div className="lg:col-span-5 relative w-full h-[500px] md:h-175  bottom-50 flex items-end justify-center">
-          <div className="about-image-container relative w-full h-full  drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+        <div className="lg:col-span-5 relative w-full h-[500px] md:h-175 flex items-end justify-center">
+          <div className="about-image-container relative w-full h-full drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
             <Image
-              src="/img/myself.png"
+              src="/img/me.png"
               alt="Nickolas Cremasco"
               fill
               priority
-              className="object-contain object-bottom"
+              className="object-contain object-bottom scale-125 origin-bottom"
             />
-            {/* Gradiente sutil na base apenas para suavizar o corte inferior da camiseta */}
+            {/* Gradiente sutil na base */}
             <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black to-transparent" />
           </div>
         </div>
