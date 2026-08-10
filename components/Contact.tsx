@@ -98,7 +98,7 @@ export default function Contact() {
             </h2>
             <div className="w-12 h-[2px] bg-blue-500" />
             <p className="text-xs md:text-sm text-gray-400 font-mono tracking-wider pt-1">
-              nickolas.cremasco@exemplo.com
+              nck.tec.suporte@gmail.com
             </p>
             <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed max-w-lg pt-4">
               {t.contact.description}
@@ -115,8 +115,8 @@ export default function Contact() {
                 <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">
                   {t.contact.emailLabel}
                 </span>
-                <a href="mailto:nickolas.cremasco@exemplo.com" className="text-sm font-medium text-gray-200 hover:text-white transition-colors">
-                  nickolas.cremasco@exemplo.com
+                <a href="mailto:nck.tec.suporte@gmail.com" className="text-sm font-medium text-gray-200 hover:text-white transition-colors">
+                  nck.tec.suporte@gmail.com
                 </a>
               </div>
             </div>
@@ -129,8 +129,8 @@ export default function Contact() {
                 <span className="block text-[10px] text-gray-500 tracking-widest uppercase font-mono">
                   {t.contact.phoneLabel}
                 </span>
-                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-white transition-colors">
-                  +55 (11) 99999-9999
+                <a href="https://wa.me/5511956062540" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-white transition-colors">
+                  +55 (11) 95606-2540
                 </a>
               </div>
             </div>
